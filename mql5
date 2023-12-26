@@ -1,0 +1,81 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                   Risk Manager EA                |
+//|                        Developer: Forex Robot Easy Team          |
+//|                    Website: forexroboteasy.com                   |
+//+------------------------------------------------------------------+
+
+#include <Trade\Trade.mqh>
+
+//+------------------------------------------------------------------+
+//| Global Variables                                                 |
+//+------------------------------------------------------------------+
+input double maxDrawdownPercentage = 10;  // Maximum allowed drawdown percentage
+input double maxLossPercentage = 5;       // Maximum allowed loss percentage
+input double maxRiskPercentage = 1;       // Maximum allowed risk percentage
+input double lotSize = 0.01;              // Default lot size
+
+//+------------------------------------------------------------------+
+//| Customizable Conditions and Actions                               |
+//+------------------------------------------------------------------+
+input bool condition1 = true;             // First customizable condition
+input bool condition2 = true;             // Second customizable condition
+input bool condition3 = true;             // Third customizable condition
+input bool condition4 = false;            // Fourth customizable condition
+input bool condition5 = false;            // Fifth customizable condition
+input bool condition6 = false;            // Sixth customizable condition
+
+input int action1 = TRADE_ACTION_NONE;    // First action to be executed
+input int action2 = TRADE_ACTION_NONE;    // Second action to be executed
+input int action3 = TRADE_ACTION_NONE;    // Third action to be executed
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Set the maximum allowed drawdown percentage
+   Trade.SetMaxDrawdownPercentage(maxDrawdownPercentage);
+
+   // Set the maximum allowed loss percentage
+   Trade.SetMaxLossPercentage(maxLossPercentage);
+
+   // Set the maximum allowed risk percentage
+   Trade.SetMaxRiskPercentage(maxRiskPercentage);
+
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Check if any of the customizable conditions are triggered
+   if(condition1 || condition2 || condition3 || condition4 || condition5 || condition6)
+   {
+      // Execute the specified actions
+      if(action1 != TRADE_ACTION_NONE)
+         Trade.ExecuteAction(action1, lotSize);
+
+      if(action2 != TRADE_ACTION_NONE)
+         Trade.ExecuteAction(action2, lotSize);
+
+      if(action3 != TRADE_ACTION_NONE)
+         Trade.ExecuteAction(action3, lotSize);
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Cleanup and perform any necessary actions before the EA is removed
+}
+
+//+------------------------------------------------------------------+
+//| Custom Functions                                                 |
+//+------------------------------------------------------------------+
+// Add any necessary custom functions here
+
